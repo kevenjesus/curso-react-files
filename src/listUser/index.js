@@ -9,6 +9,10 @@ import {
     Avatar
 } from '@material-ui/core';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getUsers } from '../actions/UserAction';
+
 const ListItemUser = props => (
     <ListItem key={props.user.id}>
         <Avatar src={props.user.avatar} />
@@ -16,39 +20,26 @@ const ListItemUser = props => (
     </ListItem>
 )
 
-export default class ListUser extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            users: []
-        }
+class ListUser extends React.Component {
+    constructor(props) {
+        super(props);
     }
     componentWillMount() {
-        fetch('https://reqres.in/api/users?page=2')
-            .then(resposta => {
-                return resposta.json()
-            })
-            .then(response => {
-                this.setState({users: response.data})
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        this.props.getUsers();
     }
     render() {
-        
         return (
         <Grid container spacing={24}>
             <Grid item xs={4}>
                 <Paper>
                     <List>
                         {
-                            this.state.users.length === 0 ?
+                            this.props.user.list.length === 0 ?
                                 <ListItem>
                                     <Typography>Olha, nao tem porra nenhuma</Typography>
                                 </ListItem>
                             :
-                            this.state.users.map(user => (
+                            this.props.user.list.map(user => (
                                 <ListItemUser user={user} />
                             ))
                         }
@@ -58,4 +49,9 @@ export default class ListUser extends React.Component {
         </Grid>
         )
     }
-}
+};
+
+const mapStateToProps = state => ({user: state.user});
+const mapDispatchToProps = dispatch => bindActionCreators({getUsers}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListUser);

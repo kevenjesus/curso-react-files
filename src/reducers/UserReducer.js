@@ -1,13 +1,13 @@
 import { GET_USERS } from '../consts';
 const INITIAL_STATE = {
-    users: [],
-    userTarget: null
+    list: []
 };
+
 
 const userReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case GET_USERS:
-            return {...state, users: action.payload}
+            return {...state, list: action.payload}
         default:
             return state;
     }
