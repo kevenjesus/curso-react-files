@@ -9,6 +9,13 @@ import {
     Avatar
 } from '@material-ui/core';
 
+const ListItemUser = props => (
+    <ListItem key={props.user.id}>
+        <Avatar src={props.user.avatar} />
+        <ListItemText primary={props.user.first_name} />
+    </ListItem>
+)
+
 export default class ListUser extends React.Component {
     constructor() {
         super();
@@ -29,6 +36,7 @@ export default class ListUser extends React.Component {
             })
     }
     render() {
+        
         return (
         <Grid container spacing={24}>
             <Grid item xs={4}>
@@ -41,10 +49,7 @@ export default class ListUser extends React.Component {
                                 </ListItem>
                             :
                             this.state.users.map(user => (
-                                <ListItem key={user.id}>
-                                    <Avatar src={user.avatar} />
-                                    <ListItemText primary={user.first_name} />
-                                </ListItem>
+                                <ListItemUser user={user} />
                             ))
                         }
                     </List>
