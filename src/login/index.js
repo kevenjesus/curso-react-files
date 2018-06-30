@@ -51,6 +51,7 @@ class Login extends React.Component {
         }
     }
     componentDidMount() {
+
         setTimeout(() => {
             this.setState({loading: false})
         },1000)
@@ -65,6 +66,7 @@ class Login extends React.Component {
                         { content }
                     </Paper>
                 </Grid>
+                
             </Grid>
         )
     }
