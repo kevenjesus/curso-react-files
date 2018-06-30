@@ -8,13 +8,14 @@ import rootReducer from './rootReducer';
 
 
 import ListUser from './listUser';
+import Profile from './Profile';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk, reduxPromise));
 
 ReactDOM.render(
     <Provider store={store}>
-        <ListUser />
+        <Profile />
     </Provider>
     , document.getElementById('root'));
 registerServiceWorker();
