@@ -4,7 +4,9 @@ import {
     Paper,
     List,
     ListItem,
-    Typography
+    ListItemText,
+    Typography,
+    Avatar
 } from '@material-ui/core';
 
 export default class ListUser extends React.Component {
@@ -39,8 +41,9 @@ export default class ListUser extends React.Component {
                                 </ListItem>
                             :
                             this.state.users.map(user => (
-                                <ListItem>
-                                    <Typography>{user.first_name}</Typography>
+                                <ListItem key={user.id}>
+                                    <Avatar src={user.avatar} />
+                                    <ListItemText primary={user.first_name} />
                                 </ListItem>
                             ))
                         }
